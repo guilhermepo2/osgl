@@ -50,6 +50,16 @@ int main() {
     SDL_GL_MakeCurrent(window, glContext);
     printf("opengl context was created!\n");
 
+    // Loading GLAD (time for the truth ?)
+    if(!gladLoadGLLoader(SDL_GL_GetProcAddress)) {
+        printf("failed to load GLAD!\n");
+        printf("%s\n", SDL_GetError());
+    }
+    printf("OpenGL Loaded\n");
+    printf("Vendor: %s\n", glGetString(GL_VENDOR));
+    printf("Renderer: %s\n", glGetString(GL_RENDERER));
+    printf("Version: %s\n", glGetString(GL_VERSION));
+
     int isRunning = 1;
     while(isRunning != 0) {
         SDL_Event e;
