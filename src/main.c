@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <glad/glad.h>
 #include <stdio.h>
 
 static const int WINDOW_WIDTH = 640;
@@ -14,6 +15,11 @@ int main() {
         return 1;
     }
     printf("SDL was initialized\n");
+
+    // setting opengl version 3.3
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
     // Creating the WINDOW!!
     window = SDL_CreateWindow(
@@ -31,6 +37,18 @@ int main() {
         return 1;
     }
     printf("windows was created!\n");
+
+    // creating opengl context
+    SDL_GLContext glContext;
+    glContext = SDL_GL_CreateContext(window);
+
+    if(glContext == NULL) {
+        printf("error creating GL context!\n");
+        printf("%s\n", SDL_GetError());
+        return 1;
+    }
+    SDL_GL_MakeCurrent(window, glContext);
+    printf("opengl context was created!\n");
 
     int isRunning = 1;
     while(isRunning != 0) {
