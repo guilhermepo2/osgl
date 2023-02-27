@@ -2,4 +2,4 @@ main
 bgfx
 sdl2r
 .DS_Store
-.vscode
+.vscode/
